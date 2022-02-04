@@ -7,7 +7,9 @@ Knowing that Ziggy was missing, Bomber went to the ruins and traverse his way to
 With the use of his personal homemade bombs, Help Bomber rescue his friend Ziggy from the hands of the underminers and escape the underground ruins. 
 Don't fret, ziggy had unfortunately dropped some of her bombs along the corridors of the ruins. Bomber can pick those up and use it to break the walls of the ruins to save ziggy and defeat the underminers that crosses his way.
 
-![Bomber-wireframe](bomber-wireframe.jpg)
+
+![Bomber-wireframe](bomber-wireframe.JPG)
+
 
 # MVP Checklist
 * Be able to render the ruins, bomber, ziggy.
