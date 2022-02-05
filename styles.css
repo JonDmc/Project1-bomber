@@ -1,3 +1,68 @@
 body{
     background-color: gray;
+    border: .3rem solid hotpink;
 }
+
+aside{
+    border: .3rem solid black;
+    height: 5vh;
+}
+canvas{
+    background-color: aqua;
+    width: 100%;
+    height: 100%;
+}
+
+.container{
+    border: .3rem solid chartreuse;
+    background-color: brown;
+    max-width: 70vw;
+    margin: 0 auto;
+    display: grid;
+    min-height: 80vh;
+    grid-column-gap: 10px;
+    grid-template-rows: .3fr 1fr .3fr;
+    grid-template-columns: .5fr 1fr .5fr;
+    grid-template-areas: "bombs title title"
+                         "game game game"
+                         "btm-left btns btm-right";
+    align-items: center;
+}
+
+main{
+    grid-area: game;
+    border: .3rem solid red
+}
+header{
+    grid-area: title;
+    background-color: aqua;
+    border: .3rem solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 5vh;
+}
+#btns{
+    background-color: aqua;
+    grid-area: btns;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 5vh;
+}
+#bombHolder{
+    background-color: aqua;
+    grid-area: bombs;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 5vh;
+}
+.bombs{
+    /* border: rem solid purple; */
+    /* border-radius: 50%; */
+    /* padding: ; */
+    max-height: 4rem;
+    max-width: 4rem;
+}
+
