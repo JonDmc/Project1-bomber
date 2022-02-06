@@ -16,16 +16,17 @@ canvas{
 .container{
     border: .3rem solid chartreuse;
     background-color: brown;
-    max-width: 70vw;
+    max-width: 60vw;
     margin: 0 auto;
     display: grid;
-    min-height: 80vh;
+    max-height: 70vh;
     grid-column-gap: 10px;
+    grid-row-gap: 10px;
     grid-template-rows: .3fr 1fr .3fr;
     grid-template-columns: .5fr 1fr .5fr;
     grid-template-areas: "bombs title title"
                          "game game game"
-                         "btm-left btns btm-right";
+                         "message message btns";
     align-items: center;
 }
 
@@ -41,6 +42,7 @@ header{
     justify-content: center;
     align-items: center;
     height: 5vh;
+    margin: 2rem;
 }
 #btns{
     background-color: aqua;
@@ -48,7 +50,7 @@ header{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 5vh;
+    height: 3vh;
 }
 #bombHolder{
     background-color: aqua;
@@ -62,7 +64,15 @@ header{
     /* border: rem solid purple; */
     /* border-radius: 50%; */
     /* padding: ; */
-    max-height: 4rem;
-    max-width: 4rem;
+    max-height: 3rem;
+    max-width: 3rem;
 }
 
+#message{
+    background-color: aqua;
+    grid-area: message;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 5vh;
+}
