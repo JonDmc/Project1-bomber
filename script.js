@@ -36,6 +36,20 @@ class Character {
         ctx.fillRect(this.x, this.y, this.width, this.height)
     }
 }
+class Bomb {
+    constructor(url,x,y,width,height){
+        this.url = url
+        this.x = x
+        this.y = y
+        this.width = width
+        this.height = height
+    }
+    render(){
+        ctx.drawImage(this.url,this.x,this.y,this.width,this.height)
+    }
+}
+const bombImg = new Image()
+bombImg.src = 'bomb.png'
 // class Enemy extends Character{
 //     constructor(x,y,width,height,color){
 //         super(x,y,width,height,color)
@@ -45,8 +59,22 @@ class Character {
 //     }
 // }
 function restartGame(){
-    ctx.clearRect(0,0,canvas.width,canvas.height)
-    
+//     console.log('hey')
+//     ctx.clearRect(0,0,canvas.width,canvas.height)
+
+//     document.addEventListener('keydown', controls)
+
+//     const bomber = new Character(40,200,40,40,'orange')
+// const ziggy = new Character(500,200,40,40,'black')
+// const underMiner = new Character(200,0,60,60,'gray')
+//     bomber.render()
+//     ziggy.render()
+//     underMiner.render()
+//     bomberMeetsZiggy()
+//     bomberMeetsUnderminer()
+//     underMinerMoveDown()
+
+//     setInterval(gameLoop,60)
     
 }
 
@@ -71,15 +99,17 @@ function controls(e) {
                 //     })
                 //  }
                 //  console.log('a'+arrImg)
-                let bomb = new Image()
-                bomb.onload = bombImg
-                bomb.src = 'bomb.png'
-                function bombImg(){
-                    ctx.drawImage(arrImg[arrImg.length-1],bomber.x+bomber.width,bomber.y,40,40)
-                }
+                // let bomb = new Image()
+                // bomb.onload = bombImg
+                // bomb.src = 'bomb.png'
+                // function bombImg(){
+                //     ctx.drawImage(arrImg[arrImg.length-1],bomber.x+bomber.width,bomber.y,40,40)
+                // }
                 // arrImg[arrImg.length-1].addEventListener('load',e =>{
                 //     ctx.drawImage(arrImg[arrImg.length-1],bomber.x+bomber.width,bomber.y,40,40)
                 // })
+                let bomb = new Bomb(bombImg,bomber.x+bomber.width,bomber.y,40,40)
+                bomb.render()
                 // ctx.drawImage(arrImg[arrImg.length-1],bomber.x+bomber.width,bomber.y,40,40)
             }else display.innerText = 'No more Bombs :('
    }
@@ -115,9 +145,11 @@ function bomberMeetsUnderminer(){
 
 function underMinerMoveDown(){
     // window.requestAnimationFrame(underMiner)
-    //underMiner.y += 2
-  if(underMiner.y + underMiner.width >= canvas.height) underMiner.y-=2
-  if(underMiner.x+underMiner.width <= canvas.x) underMiner.y+=2
+    
+  //if(underMiner.y + underMiner.height >= canvas.height &&) underMiner.y-=5
+//   if(underMiner.y + underMiner.height >= canvas.height) underMiner.y -=5
+//   if(underMiner.y <= canvas.height) underMiner.y +=5
+    
  
 
     console.log(underMiner.y)
@@ -132,4 +164,5 @@ function gameLoop() {
     underMiner.render()
     bomberMeetsZiggy()
     bomberMeetsUnderminer()
+    underMinerMoveDown()
 }
