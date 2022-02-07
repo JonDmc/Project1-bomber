@@ -1,6 +1,6 @@
 body{
     background-color: gray;
-    border: .3rem solid hotpink;
+    /* border: .3rem solid hotpink; */
 }
 
 aside{
@@ -9,7 +9,7 @@ aside{
 }
 canvas{
     /* background-color: aqua; */
-    background-image: url('rock.png');
+    background-image: url('img/rock.png');
     width: 100%;
     height: 100%;
 }

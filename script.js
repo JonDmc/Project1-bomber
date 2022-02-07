@@ -19,9 +19,6 @@ let gameLoopInterval = setInterval(gameLoop,60)
 let arrImg = Array.from(document.querySelectorAll('img'))
 console.log(arrImg)
 
-
-// let enemyMovement = setInterval(underMinerMove,10)
-
 class Character {
     constructor (x,y,width,height,color){
         this.x = x
@@ -35,7 +32,38 @@ class Character {
         ctx.fillStyle = this.color
         ctx.fillRect(this.x, this.y, this.width, this.height)
     }
+    // draw(){
+    //     ctx.clearRect(0,0,canvas.width,canvas.height)
+    //     ctx.fillStyle = this.color
+    //     ctx.fillRect(this.x, this.y, this.width, this.height)
+    // }
+    // move(){
+        
+    //     this.y+=1
+    // }
 }
+// let collision = false
+class Enemy extends Character{
+    static collision = false
+    constructor(x,y,width,height,color){
+        super(x,y,width,height,color)
+    }
+    move(speed){
+        this.speed = speed
+        if(Enemy.collision === false){
+            underMiner.y += this.speed
+            if(underMiner.y + underMiner.height >= canvas.height)
+            Enemy.collision = true
+        }
+        if(Enemy.collision === true){
+            underMiner.y -= this.speed
+            if(underMiner.y <= 0)
+            Enemy.collision = false
+        }
+
+    }
+}
+
 class Bomb {
     constructor(url,x,y,width,height){
         this.url = url
@@ -49,38 +77,12 @@ class Bomb {
     }
 }
 const bombImg = new Image()
-bombImg.src = 'bomb.png'
-// class Enemy extends Character{
-//     constructor(x,y,width,height,color){
-//         super(x,y,width,height,color)
-//     }
-//     move(){
+bombImg.src = 'img/bomb.png'
 
-//     }
-// }
-function restartGame(){
-//     console.log('hey')
-//     ctx.clearRect(0,0,canvas.width,canvas.height)
-
-//     document.addEventListener('keydown', controls)
-
-//     const bomber = new Character(40,200,40,40,'orange')
-// const ziggy = new Character(500,200,40,40,'black')
-// const underMiner = new Character(200,0,60,60,'gray')
-//     bomber.render()
-//     ziggy.render()
-//     underMiner.render()
-//     bomberMeetsZiggy()
-//     bomberMeetsUnderminer()
-//     underMinerMoveDown()
-
-//     setInterval(gameLoop,60)
-    
-}
 
 const bomber = new Character(40,200,40,40,'orange')
 const ziggy = new Character(500,200,40,40,'black')
-const underMiner = new Character(200,0,60,60,'gray')
+const underMiner = new Enemy(200,500,60,60,'gray')
 
 function controls(e) {
     const speed = 10
@@ -141,28 +143,33 @@ function bomberMeetsUnderminer(){
         clearInterval(gameLoopInterval)
        }
 }
-    
-
-function underMinerMoveDown(){
-    // window.requestAnimationFrame(underMiner)
-    
-  //if(underMiner.y + underMiner.height >= canvas.height &&) underMiner.y-=5
-//   if(underMiner.y + underMiner.height >= canvas.height) underMiner.y -=5
-//   if(underMiner.y <= canvas.height) underMiner.y +=5
-    
- 
-
-    console.log(underMiner.y)
-//    console.log(ctx)
-//    console.log(canvas)
-}
 
 function gameLoop() {
     ctx.clearRect(0,0,canvas.width,canvas.height)
     bomber.render()
     ziggy.render()
     underMiner.render()
+    underMiner.move(5)
     bomberMeetsZiggy()
     bomberMeetsUnderminer()
-    underMinerMoveDown()
+    underMinerMove()
 }
+function restartGame(){
+    //     console.log('hey')
+    //     ctx.clearRect(0,0,canvas.width,canvas.height)
+    
+    //     document.addEventListener('keydown', controls)
+    
+    //     const bomber = new Character(40,200,40,40,'orange')
+    // const ziggy = new Character(500,200,40,40,'black')
+    // const underMiner = new Character(200,0,60,60,'gray')
+    //     bomber.render()
+    //     ziggy.render()
+    //     underMiner.render()
+    //     bomberMeetsZiggy()
+    //     bomberMeetsUnderminer()
+    //     underMinerMoveDown()
+    
+    //     setInterval(gameLoop,60)
+        
+    }
