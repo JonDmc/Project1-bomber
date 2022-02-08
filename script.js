@@ -16,8 +16,27 @@ document.addEventListener('keydown', controls)
 //setup gameLoop
 let gameLoopInterval = setInterval(gameLoop,60)
 
+// DECLARATIONS -------------------------------
 let arrImg = Array.from(document.querySelectorAll('img'))
 console.log(arrImg)
+let arrBomb = []
+let arrEnemy = []
+
+const bombImg = new Image()
+bombImg.src = 'img/bomb.png'
+
+// let arrCol = []
+// for(let i = 0; i < 5; i++)
+//     arrCol.push(false)
+
+let collision1 = false
+let collision2 = false
+let collision3 = false
+let collision4 = false
+let collision5 = false
+
+// DECLARATIONS -------------------------------
+
 
 class Character {
     constructor (x,y,width,height,color){
@@ -27,42 +46,38 @@ class Character {
         this.height = height
         this.color = color
         this.alive = true
+        // this.url = url
     }
     render(){
         ctx.fillStyle = this.color
         ctx.fillRect(this.x, this.y, this.width, this.height)
     }
-    // draw(){
-    //     ctx.clearRect(0,0,canvas.width,canvas.height)
-    //     ctx.fillStyle = this.color
-    //     ctx.fillRect(this.x, this.y, this.width, this.height)
-    // }
-    // move(){
-        
-    //     this.y+=1
+    // render2(){
+    //     ctx.drawImage(this.url,this.x,this.y,this.width,this.height)
     // }
 }
 // let collision = false
-class Enemy extends Character{
-    static collision = false
-    constructor(x,y,width,height,color){
-        super(x,y,width,height,color)
-    }
-    move(speed){
-        this.speed = speed
-        if(Enemy.collision === false){
-            underMiner.y += this.speed
-            if(underMiner.y + underMiner.height >= canvas.height)
-            Enemy.collision = true
-        }
-        if(Enemy.collision === true){
-            underMiner.y -= this.speed
-            if(underMiner.y <= 0)
-            Enemy.collision = false
-        }
+// class Enemy extends Character{
+//     // static collision = false
+//     constructor(x,y,width,height,color){
+//         super(x,y,width,height,color)
+//     }
+//     // move(speed){
+//     //     this.speed = speed
+//     //     if(Enemy.collision === false){
+//     //         this.y += this.speed
+//     //         if(this.y + this.height >= canvas.height)
+//     //         Enemy.collision = true
+//     //     }
+//     //     if(Enemy.collision === true){
+//     //         this.y -= this.speed
+//     //         if(this.y <= 0)
+//     //         Enemy.collision = false
+//     //     }
+    
 
-    }
-}
+//     // }
+// }
 
 class Bomb {
     constructor(url,x,y,width,height){
@@ -76,13 +91,45 @@ class Bomb {
         ctx.drawImage(this.url,this.x,this.y,this.width,this.height)
     }
 }
-const bombImg = new Image()
-bombImg.src = 'img/bomb.png'
+// DECLARATION OF OBJECTS ---------------------------------
+const bomber = new Character(canvas.width*.1,canvas.height*.4,40,40,'orange')
+const ziggy = new Character(canvas.width-(canvas.width*.1),canvas.height*.4,40,40,'black')
 
+// for(let i = 0; i < 5; i++){
+//     let rand = Math.random()*(canvas.width)
+//     const underMiner = new Enemy(rand,500,60,60,'gray')
+//     arrEnemy.push(underMiner)
+// }
+const underMiner1 = new Character((canvas.width*.1)*2,500,60,60,'gray')
+const underMiner2 = new Character((canvas.width*.2)*1.5,600,60,60,'gray')
+const underMiner3 = new Character((canvas.width*.3)*1.5,700,60,60,'gray')
+const underMiner4 = new Character((canvas.width*.4)*1.5,200,60,60,'gray')
+const underMiner5 = new Character((canvas.width*.5)*1.5,100,60,60,'gray')
 
-const bomber = new Character(40,200,40,40,'orange')
-const ziggy = new Character(500,200,40,40,'black')
-const underMiner = new Enemy(200,500,60,60,'gray')
+// const underMiner1 = new Enemy((canvas.width*.1)*2,500,60,60,'gray')
+// const underMiner2 = new Enemy((canvas.width*.2)*1.5,600,60,60,'gray')
+// const underMiner3 = new Enemy((canvas.width*.3)*1.5,700,60,60,'gray')
+// const underMiner4 = new Enemy((canvas.width*.4)*1.5,200,60,60,'gray')
+// const underMiner5 = new Enemy((canvas.width*.5)*1.5,100,60,60,'gray')
+// DECLARATION OF OBJECTS ---------------------------------
+// let enemy = []
+// function createEnemy(num){
+    
+    
+//     for(let i = 0; i < num; i++)
+//     {
+//         let randY = Math.random()*(canvas.height - 60)
+//         let randX = Math.random()*(canvas.width -60) 
+//         if(randX < canvas.width*.1){
+//             randX = randX + canvas.width*.1 + 40
+//         }else if (randX > canvas.width-(canvas.width*.1)){
+//             randX = randX - canvas.width*.1 - 40
+//         }
+//      let underMiner = new Enemy(randX,randY,60,60,'gray')
+//       enemy.push(underMiner)
+//     }
+    
+// }
 
 function controls(e) {
     const speed = 10
@@ -94,31 +141,19 @@ function controls(e) {
         if(e.key === 'D'|| e.key === 'd'|| e.key === 'ArrowRight') bomber.x+=speed
         if(e.key === 'B' || e.key ==='b'){
             if(arrImg.length > 0) {
-                // console.log(arrImg)
-                // for(let i = 0; i < arrImg.length; i++){
-                //     arrImg[i].addEventListener('load', function(){
-                //         ctx.drawImage(arrImg[arrImg.length-1],bomber.x+10,bomber.y,40,40)
-                //     })
-                //  }
-                //  console.log('a'+arrImg)
-                // let bomb = new Image()
-                // bomb.onload = bombImg
-                // bomb.src = 'bomb.png'
-                // function bombImg(){
-                //     ctx.drawImage(arrImg[arrImg.length-1],bomber.x+bomber.width,bomber.y,40,40)
-                // }
-                // arrImg[arrImg.length-1].addEventListener('load',e =>{
-                //     ctx.drawImage(arrImg[arrImg.length-1],bomber.x+bomber.width,bomber.y,40,40)
-                // })
                 let bomb = new Bomb(bombImg,bomber.x+bomber.width,bomber.y,40,40)
-                bomb.render()
-                // ctx.drawImage(arrImg[arrImg.length-1],bomber.x+bomber.width,bomber.y,40,40)
+                arrBomb.push(bomb)
+                arrImg.pop()
+                document.querySelector('img').remove()
+
             }else display.innerText = 'No more Bombs :('
    }
 }
 }
 
-function bomberMeetsZiggy(){
+
+
+function charMeetGoal(bomber,ziggy){
     //value of bomber right >= ziggy left
     //value of bomber bottom >= ziggy top
     //value of bomber left <= ziggy right
@@ -133,7 +168,93 @@ function bomberMeetsZiggy(){
        }
 }
 
-function bomberMeetsUnderminer(){
+function moveEnemy1(enemy,speed){
+    
+        enemy.speed = speed
+        if(collision1 === false){
+            enemy.y += enemy.speed
+            if(enemy.y + enemy.height >= canvas.height)
+            collision1 = true
+        }
+        if(collision1 === true){
+            enemy.y -= enemy.speed
+            if(enemy.y <= 0)
+            collision1 = false
+        }
+    }
+
+    function moveEnemy2(enemy,speed){
+    
+        enemy.speed = speed
+        if(collision2 === false){
+            enemy.y += enemy.speed
+            if(enemy.y + enemy.height >= canvas.height)
+            collision2 = true
+        }
+        if(collision2 === true){
+            enemy.y -= enemy.speed
+            if(enemy.y <= 0)
+            collision2 = false
+        }
+    }
+    function moveEnemy3(enemy,speed){
+    
+        enemy.speed = speed
+        if(collision3 === false){
+            enemy.y += enemy.speed
+            if(enemy.y + enemy.height >= canvas.height)
+            collision3 = true
+        }
+        if(collision3 === true){
+            enemy.y -= enemy.speed
+            if(enemy.y <= 0)
+            collision3 = false
+        }
+    }
+    function moveEnemy4(enemy,speed){
+    
+        enemy.speed = speed
+        if(collision4 === false){
+            enemy.y += enemy.speed
+            if(enemy.y + enemy.height >= canvas.height)
+            collision4 = true
+        }
+        if(collision4 === true){
+            enemy.y -= enemy.speed
+            if(enemy.y <= 0)
+            collision4 = false
+        }
+    }
+    function moveEnemy5(enemy,speed){
+    
+        enemy.speed = speed
+        if(collision5 === false){
+            enemy.y += enemy.speed
+            if(enemy.y + enemy.height >= canvas.height)
+            collision5 = true
+        }
+        if(collision5 === true){
+            enemy.y -= enemy.speed
+            if(enemy.y <= 0)
+            collision5 = false
+        }
+    }
+    function bombMeetsEnemy(bomb,enemy){
+        console.log(bomb)
+        if(enemy.x + enemy.width >= bomb.x && 
+            bomb.x + bomb.width >= enemy.x &&
+            enemy.y + enemy.height >= bomb.y &&
+           bomb.y + bomb.height >= enemy.y ){
+            // arrBomb.pop()
+            // clearInterval(gameLoopInterval)
+            ctx.clearRect(enemy.x,enemy.y,enemy.width,enemy.height)
+            ctx.clearRect(bomb.x,bomb.y,bomb.width,bomb.height)
+     
+    }
+}
+    
+
+function charMeetEnemy(bomber,underMiner){
     if(bomber.x + bomber.width >= underMiner.x && 
         underMiner.x + underMiner.width >= bomber.x &&
        bomber.y + bomber.height >= underMiner.y &&
@@ -144,15 +265,39 @@ function bomberMeetsUnderminer(){
        }
 }
 
+// createEnemy(2)
 function gameLoop() {
     ctx.clearRect(0,0,canvas.width,canvas.height)
-    bomber.render()
-    ziggy.render()
-    underMiner.render()
-    underMiner.move(5)
-    bomberMeetsZiggy()
-    bomberMeetsUnderminer()
-    underMinerMove()
+    bomber.render() //renders the main char
+    ziggy.render()  //renders the goal
+
+    //renders the bomb image stored in the array of images
+    for(let i = 0; i < arrBomb.length;i++){
+        arrBomb[i].render()
+    }
+
+    // for(let i = 0; i < arrEnemy.length;i++){
+    //     arrEnemy[i].render()
+    // }
+
+    underMiner1.render() //renders the enemy
+    underMiner2.render() //renders the enemy
+    underMiner3.render() //renders the enemy
+    underMiner4.render() //renders the enemy
+    underMiner5.render() //renders the enemy
+    moveEnemy1(underMiner1,5)
+    moveEnemy2(underMiner2,15)
+    moveEnemy3(underMiner3,5)
+    moveEnemy4(underMiner4,15)
+    moveEnemy5(underMiner5,5)
+    charMeetGoal(bomber,ziggy) //main char -> goal collision detection
+    charMeetEnemy(bomber,underMiner1)//main char -> enemy collision detection
+    charMeetEnemy(bomber,underMiner2)
+    charMeetEnemy(bomber,underMiner3)
+    charMeetEnemy(bomber,underMiner4)
+    charMeetEnemy(bomber,underMiner5)
+    bombMeetsEnemy(arrBomb[0],underMiner1)
+    
 }
 function restartGame(){
     //     console.log('hey')
