@@ -25,6 +25,9 @@ let arrEnemy = []
 const bombImg = new Image()
 bombImg.src = 'img/bomb.png'
 
+const umImg = new Image()
+umImg.src = 'img/underminer.png'
+
 // let arrCol = []
 // for(let i = 0; i < 5; i++)
 //     arrCol.push(false)
@@ -39,22 +42,31 @@ let collision5 = false
 
 
 class Character {
-    constructor (x,y,width,height,color){
+    // constructor (x,y,width,height,color){
+    //     this.x = x
+    //     this.y = y
+    //     this.width = width
+    //     this.height = height
+    //     this.color = color
+    //     this.alive = true
+    //     // this.url = url
+    // }
+    constructor (url,x,y,width,height,color){
         this.x = x
         this.y = y
         this.width = width
         this.height = height
         this.color = color
         this.alive = true
-        // this.url = url
+        this.url = url
     }
     render(){
         ctx.fillStyle = this.color
         ctx.fillRect(this.x, this.y, this.width, this.height)
     }
-    // render2(){
-    //     ctx.drawImage(this.url,this.x,this.y,this.width,this.height)
-    // }
+    render2(){
+        ctx.drawImage(this.url,this.x,this.y,this.width,this.height)
+    }
 }
 // let collision = false
 // class Enemy extends Character{
@@ -100,11 +112,11 @@ const ziggy = new Character(canvas.width-(canvas.width*.1),canvas.height*.4,40,4
 //     const underMiner = new Enemy(rand,500,60,60,'gray')
 //     arrEnemy.push(underMiner)
 // }
-const underMiner1 = new Character((canvas.width*.1)*2,500,60,60,'gray')
-const underMiner2 = new Character((canvas.width*.2)*1.5,600,60,60,'gray')
-const underMiner3 = new Character((canvas.width*.3)*1.5,700,60,60,'gray')
-const underMiner4 = new Character((canvas.width*.4)*1.5,200,60,60,'gray')
-const underMiner5 = new Character((canvas.width*.5)*1.5,100,60,60,'gray')
+const underMiner1 = new Character(umImg,(canvas.width*.1)*2,500,80,80,'gray')
+const underMiner2 = new Character(umImg,(canvas.width*.2)*1.5,600,80,80,'gray')
+const underMiner3 = new Character(umImg,(canvas.width*.3)*1.5,700,80,80,'gray')
+const underMiner4 = new Character(umImg,(canvas.width*.4)*1.5,200,80,80,'gray')
+const underMiner5 = new Character(umImg,(canvas.width*.5)*1.5,100,80,80,'gray')
 
 // const underMiner1 = new Enemy((canvas.width*.1)*2,500,60,60,'gray')
 // const underMiner2 = new Enemy((canvas.width*.2)*1.5,600,60,60,'gray')
@@ -249,7 +261,7 @@ function moveEnemy1(enemy,speed){
             // arrBomb.pop()
             // clearInterval(gameLoopInterval)
             bomb.y = -50
-            enemy.y = -60
+            enemy.y = -90
      
     }
 }
@@ -281,11 +293,11 @@ function gameLoop() {
     //     arrEnemy[i].render()
     // }
 
-    underMiner1.render() //renders the enemy
-    underMiner2.render() //renders the enemy
-    underMiner3.render() //renders the enemy
-    underMiner4.render() //renders the enemy
-    underMiner5.render() //renders the enemy
+    underMiner1.render2() //renders the enemy
+    underMiner2.render2() //renders the enemy
+    underMiner3.render2() //renders the enemy
+    underMiner4.render2() //renders the enemy
+    underMiner5.render2() //renders the enemy
     moveEnemy1(underMiner1,20)
     moveEnemy2(underMiner2,15)
     moveEnemy3(underMiner3,5)
@@ -297,7 +309,7 @@ function gameLoop() {
     charMeetEnemy(bomber,underMiner3)
     charMeetEnemy(bomber,underMiner4)
     charMeetEnemy(bomber,underMiner5)
-    
+
     for(let i = 0; i < arrBomb.length; i++){
         bombMeetsEnemy(arrBomb[i],underMiner1)
         bombMeetsEnemy(arrBomb[i],underMiner2)
@@ -310,21 +322,5 @@ function gameLoop() {
     // bombMeetsEnemy(arrBomb[1],underMiner2)
 }
 function restartGame(){
-    //     console.log('hey')
-    //     ctx.clearRect(0,0,canvas.width,canvas.height)
-    
-    //     document.addEventListener('keydown', controls)
-    
-    //     const bomber = new Character(40,200,40,40,'orange')
-    // const ziggy = new Character(500,200,40,40,'black')
-    // const underMiner = new Character(200,0,60,60,'gray')
-    //     bomber.render()
-    //     ziggy.render()
-    //     underMiner.render()
-    //     bomberMeetsZiggy()
-    //     bomberMeetsUnderminer()
-    //     underMinerMoveDown()
-    
-    //     setInterval(gameLoop,60)
-        
+    location.reload()  
     }
