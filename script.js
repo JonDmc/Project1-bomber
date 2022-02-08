@@ -112,6 +112,7 @@ const underMiner5 = new Character((canvas.width*.5)*1.5,100,60,60,'gray')
 // const underMiner4 = new Enemy((canvas.width*.4)*1.5,200,60,60,'gray')
 // const underMiner5 = new Enemy((canvas.width*.5)*1.5,100,60,60,'gray')
 // DECLARATION OF OBJECTS ---------------------------------
+
 // let enemy = []
 // function createEnemy(num){
     
@@ -247,8 +248,8 @@ function moveEnemy1(enemy,speed){
            bomb.y + bomb.height >= enemy.y ){
             // arrBomb.pop()
             // clearInterval(gameLoopInterval)
-            ctx.clearRect(enemy.x,enemy.y,enemy.width,enemy.height)
-            ctx.clearRect(bomb.x,bomb.y,bomb.width,bomb.height)
+            bomb.y = -50
+            enemy.y = -60
      
     }
 }
@@ -285,7 +286,7 @@ function gameLoop() {
     underMiner3.render() //renders the enemy
     underMiner4.render() //renders the enemy
     underMiner5.render() //renders the enemy
-    moveEnemy1(underMiner1,5)
+    moveEnemy1(underMiner1,20)
     moveEnemy2(underMiner2,15)
     moveEnemy3(underMiner3,5)
     moveEnemy4(underMiner4,15)
@@ -296,8 +297,17 @@ function gameLoop() {
     charMeetEnemy(bomber,underMiner3)
     charMeetEnemy(bomber,underMiner4)
     charMeetEnemy(bomber,underMiner5)
-    bombMeetsEnemy(arrBomb[0],underMiner1)
     
+    for(let i = 0; i < arrBomb.length; i++){
+        bombMeetsEnemy(arrBomb[i],underMiner1)
+        bombMeetsEnemy(arrBomb[i],underMiner2)
+        bombMeetsEnemy(arrBomb[i],underMiner3)
+        bombMeetsEnemy(arrBomb[i],underMiner4)
+        bombMeetsEnemy(arrBomb[i],underMiner5)
+    }
+    
+    // bombMeetsEnemy(arrBomb[0],underMiner1)
+    // bombMeetsEnemy(arrBomb[1],underMiner2)
 }
 function restartGame(){
     //     console.log('hey')
