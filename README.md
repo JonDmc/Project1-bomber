@@ -15,18 +15,19 @@ Don't fret, ziggy had unfortunately dropped some of her bombs along the corridor
 * Canvas for the gameplay
 
 # MVP Checklist
-* Be able to render bomber, ziggy, and the underminers (with geometric figures).
+* Be able to render bomber, ziggy, and the underminers.
 * Be able to move Bomber with the use of 'WASD'.
 * Be able to plant bombs along ruins by pressing 'B'.
+* Be able to pick-up bombs.
 * Be able to stop the game once Bomber reach ziggy.
 * A restart button
 
 # Stretch Goals
-* Be able to add moving underminers.
+* Be able to move underminers.
 * Be able to destroy underminers with the bomb by using Collision Detection.
 * Be able to render the walls and destroy it.
-* Be able to use sprites for the characters
-* Be able to stop the game if the underminers reached Bomber or bomber gets hit with a bomb.
+* Be able to use sprites/images for the characters
+* Be able to stop the game if the underminers reached Bomber.
 * Be able to change the level (i.e. the position of the walls, underminers,bombs; the pacing of the underminers,etc..)
 
 # Potential Roadblocks

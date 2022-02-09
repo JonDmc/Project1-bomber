@@ -1,12 +1,23 @@
-body{
-    background-color: gray;
-    /* border: .3rem solid hotpink; */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans&family=Press+Start+2P&display=swap');
+*{
+   font-family: 'Press Start 2P'; 
+   color: yellow;
 }
 
 aside{
     border: .3rem solid black;
     height: 5vh;
 }
+
+body{
+    background-color: gray;
+    background-image: url('img/bg.jpg');
+}
+button{
+    background-color: black;
+}
+
+
 canvas{
     /* background-color: aqua; */
     background-image: url('img/rock.png');
@@ -14,9 +25,27 @@ canvas{
     height: 100%;
 }
 
+header{
+    grid-area: title;
+    text-align: center;
+    /* background-color: beige; */
+    background-color: black;
+    border: .3rem solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 5vh;
+    margin: 2rem;
+}
+
+main{
+    grid-area: game;
+    border: .3rem solid black;
+    margin: auto 2rem;
+}
 .container{
-    border: .3rem solid chartreuse;
-    background-color: brown;
+    border: .3rem solid black;
+    background-color: maroon;
     max-width: 60vw;
     margin: 0 auto;
     display: grid;
@@ -31,36 +60,27 @@ canvas{
     align-items: center;
 }
 
-main{
-    grid-area: game;
-    border: .3rem solid red;
-    
-}
-header{
-    grid-area: title;
-    background-color: aqua;
-    border: .3rem solid black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 5vh;
-    margin: 2rem;
-}
 #btns{
-    background-color: aqua;
+    /* background-color: beige; */
+    background-color: black;
+    text-align: center;
     grid-area: btns;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 3vh;
+    margin: 2rem;
 }
 #bombHolder{
-    background-color: aqua;
+    /* background-color: beige; */
+    background-color: black;
+    text-align: center;
     grid-area: bombs;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 5vh;
+    margin: 2rem;
 }
 .bombs{
     /* border: rem solid purple; */
@@ -71,10 +91,13 @@ header{
 }
 
 #message{
-    background-color: aqua;
+    text-align: center;
+    /* background-color: beige; */
+    background-color: black;
     grid-area: message;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 5vh;
+    margin: 2rem;
 }
