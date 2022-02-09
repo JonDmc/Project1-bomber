@@ -94,16 +94,31 @@ function plantBomb(e){
             document.querySelector('img').remove()
 
          }else {
-             if(arrImg.length === 0){
-            display.innerText = 'No more Bombs :('
-            const spawnBomb = setTimeout(()=>{
-            let bomb = new Pixel(bombImg,Math.random()*(ziggy.x-ziggy.width),Math.random()*(canvas.height-bomb.height),40,40)
-            arrBomb.push(bomb)
-            },2000)
+              display.innerText = 'No more Bombs :('
+            //   spawnBomb()  
                 }
-                else clearTimeout(spawnBomb)
-         }
+        }
+}
+
+// function spawnBomb() {
+//     if(arrImg.length === 0){
+//         setTimeout(()=>{
+//         let bomb = new Pixel(bombImg,Math.random()*(ziggy.x-ziggy.width),Math.random()*(canvas.height-40),40,40)
+//         arrBomb.push(bomb)},2000)
+//     }
+// }
+
+function charPicksBomb(bomber,bomb){
+    if(bomber.x === bomb.x && bomber.y === bomb.y){
+        display.innerText = ''
+        let newBombImg = document.createElement('img')
+        newBombImg.src = "img/bomb.png"
+        newBombImg.classList.add('bombs')
+        document.querySelector('#bombHolder').appendChild(newBombImg)
+        arrImg.push(document.querySelector('img'))
+        bomb.y = -300
     }
+    // } else  display.innerText = 'Bomb Holder is full'
 }
 
 function charMeetsGoal(bomber,ziggy){
@@ -131,7 +146,6 @@ function bombMeetsEnemy(bomb,enemy){
         enemy.y = -300 
      }
 }
-    
 
 function charMeetsEnemy(bomber,underMiner){
     if((bomber.x -15) + (bomber.width-10) >= underMiner.x && 
@@ -143,20 +157,6 @@ function charMeetsEnemy(bomber,underMiner){
         clearInterval(gameLoopInterval)        
        }
 }
-
-function charPicksBomb(bomber,bomb){
-    if(bomber.x === bomb.x && bomber.y === bomb.y && arrImg.length < 3){
-        display.innerText = ''
-        let newBombImg = document.createElement('img')
-        newBombImg.src = "img/bomb.png"
-        newBombImg.classList.add('bombs')
-        document.querySelector('#bombHolder').appendChild(newBombImg)
-        arrImg.push(document.querySelector('img'))
-        bomb.y = -300
-    }
-    if(arrImg.length > 3) display.innerText = 'Bomb Holder is full'
-}
-
 
 function moveEnemy1(enemy,speed){
     
@@ -230,7 +230,6 @@ function moveEnemy5(enemy,speed){
     }
 }
 
-// createEnemy(2)
 function gameLoop() {
     ctx.clearRect(0,0,canvas.width,canvas.height)
     bomber.render() //renders the main char
