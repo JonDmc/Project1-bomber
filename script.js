@@ -101,20 +101,36 @@ function startGame(){
 }
 
 function restartGame(){
-        location.reload()
-        // bomber.x = Math.floor(canvas.width*.1)
-        // bomber.y = Math.floor(canvas.height*.4)
-        // underMiner1.x = (canvas.width*.1)*2
-        // underMiner1.y = 500
-        // underMiner2.x = (canvas.width*.2)*1.5
-        // underMiner2.y = 600
-        // underMiner3.x = (canvas.width*.3)*1.5
-        // underMiner3.y = 700
-        // underMiner4.x = (canvas.width*.4)*1.5
-        // underMiner4.y = 100
-        // underMiner5.x = (canvas.width*.5)*1.5
-        // underMiner5.y = -100
-        // gameLoopInterval = setInterval(gameLoop,60)
+        // location.reload()
+        
+        bomber.x = Math.floor(canvas.width*.1)
+        bomber.y = Math.floor(canvas.height*.4)
+        underMiner1.x = (canvas.width*.1)*2
+        underMiner1.y = 500
+        underMiner2.x = (canvas.width*.2)*1.5
+        underMiner2.y = 600
+        underMiner3.x = (canvas.width*.3)*1.5
+        underMiner3.y = 700
+        underMiner4.x = (canvas.width*.4)*1.5
+        underMiner4.y = 100
+        underMiner5.x = (canvas.width*.5)*1.5
+        underMiner5.y = -100
+        if(arrImg.length != 5){
+            let temp = 5 - arrImg.length
+            for(let i = 0; i < temp+1; i++){
+                let newBombImg = document.createElement('img')
+                newBombImg.src = "img/bomb.png"
+                newBombImg.classList.add('bombs')
+                document.querySelector('#bombHolder').appendChild(newBombImg)
+                arrImg.push(document.querySelector('img'))
+            }
+        }
+        if(bgAudio.paused === true){
+            bgAudio.play()
+        }
+
+        clearInterval(gameLoopInterval)
+        gameLoopInterval = setInterval(gameLoop,60)
 }
 
 function toggleAudio(){
