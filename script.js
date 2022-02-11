@@ -79,7 +79,6 @@ const underMiner3 = new Pixel(umImg,(canvas.width*.3)*1.5,700,60,60)
 const underMiner4 = new Pixel(umImg,(canvas.width*.4)*1.5,200,60,60)
 const underMiner5 = new Pixel(umImg,(canvas.width*.5)*1.5,100,60,60)
 
-const crate = new Pixel(crateImg,100,500,60,60)
 // DECLARATION OF OBJECTS end---------------------------------
 
 function startEndGame(){
@@ -125,7 +124,7 @@ function charPicksBomb(bomber,bomb){
         newBombImg.classList.add('bombs')
         document.querySelector('#bombHolder').appendChild(newBombImg)
         arrImg.push(document.querySelector('img'))
-        bomb.x = -300//to remove the bomb outside canvas
+        bomb.y = -300//to remove the bomb outside canvas
         pickupBombAudio.play()
     }
 }
@@ -253,14 +252,11 @@ function gameLoop() {
     bomber.render() //renders the main char
     ziggy.render()  //renders the goal
     controls()
-
     //renders the bomb image stored in the array of images
     for(let i = 0; i < arrBomb.length;i++){
         arrBomb[i].render()
 
     }
-
-    crate.render()
 
     underMiner1.render() //renders the enemy
     underMiner2.render() 
