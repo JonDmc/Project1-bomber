@@ -38,8 +38,10 @@ bomberImg.src = 'img/bomber.png'
 const ziggyImg = new Image()
 ziggyImg.src = 'img/ziggy.png'
 
+const crateImg = new Image()
+crateImg.src = 'img/crate.png'
+
 const bgAudio = new Audio('audio/bg-music.mp3')
-// const loseAudio = new Audio('audio/bg-music.mp3')
 const winAudio = new Audio('audio/win-sfx.wav')
 const enemyDeadAudio = new Audio('audio/enemy-dead-sfx.wav')
 const charDeadAudio = new Audio('audio/char-dead-sfx.wav')
@@ -51,22 +53,7 @@ let collision2 = false
 let collision3 = false
 let collision4 = false
 let collision5 = false
-
 // DECLARATIONS end-------------------------------
-function startEndGame(){
-
-    if(!gameLoopInterval){
-    gameLoopInterval = setInterval(gameLoop,60)
-    
-    }else {
-        clearInterval(gameLoopInterval)
-        gameLoopInterval = null
-        bgAudio.pause()
-    }
-}
-function restartGame(){
-    location.reload()  
-}
 
 class Pixel {
         constructor (url,x,y,width,height){
@@ -84,7 +71,7 @@ class Pixel {
 
 // DECLARATION OF OBJECTS start---------------------------------
 const bomber = new Pixel(bomberImg,Math.floor(canvas.width*.1),Math.floor(canvas.height*.4),40,60)
-const ziggy = new Pixel(ziggyImg,canvas.width-(canvas.width*.1),canvas.height*.4,60,60)
+const ziggy = new Pixel(ziggyImg,Math.floor(canvas.width-(canvas.width*.1)),Math.floor(canvas.height*.4),60,60)
 
 const underMiner1 = new Pixel(umImg,(canvas.width*.1)*2,500,60,60)
 const underMiner2 = new Pixel(umImg,(canvas.width*.2)*1.5,600,60,60)
@@ -92,8 +79,19 @@ const underMiner3 = new Pixel(umImg,(canvas.width*.3)*1.5,700,60,60)
 const underMiner4 = new Pixel(umImg,(canvas.width*.4)*1.5,200,60,60)
 const underMiner5 = new Pixel(umImg,(canvas.width*.5)*1.5,100,60,60)
 
-
+const crate = new Pixel(crateImg,100,500,60,60)
 // DECLARATION OF OBJECTS end---------------------------------
+
+function startEndGame(){
+
+    if(!gameLoopInterval){
+    gameLoopInterval = setInterval(gameLoop,60)
+    }
+}
+
+function restartGame(){
+    location.reload()  
+}
 
 function controls() {
     const speed = 10
@@ -113,25 +111,13 @@ function plantBomb(e){
             arrImg.pop()
             document.querySelector('img').remove()
 
-         }else {
-              display.innerText = 'No more Bombs :('
-              spawnBomb()  
-                }
+         }else display.innerText = 'No more Bombs :('
+             
     }
 }
 
-function spawnBomb() {
-    // if(arrImg.length === 0){
-    //     setTimeout(()=>{
-    //     let bomb = new Pixel(bombImg,Math.random()*(ziggy.x-ziggy.width),Math.random()*(canvas.height-40),40,40)
-    //     arrBomb.push(bomb)},2000)
-    // }
-    let bomb = new Pixel(bombImg,Math.floor(Math.random()*(ziggy.x-ziggy.width)),Math.floor(Math.random()*(canvas.height-40)),40,40)
-    arrBomb.push(bomb)
-}
-
 function charPicksBomb(bomber,bomb){
-    if(Math.floor(bomber.x) == Math.floor(bomb.x) && Math.floor(bomber.y) == Math.floor(bomb.y)){
+    if(Math.floor(bomber.x) === Math.floor(bomb.x) && Math.floor(bomber.y) === Math.floor(bomb.y)){
         console.log('it works')
         display.innerText = ''
         let newBombImg = document.createElement('img')
@@ -139,10 +125,9 @@ function charPicksBomb(bomber,bomb){
         newBombImg.classList.add('bombs')
         document.querySelector('#bombHolder').appendChild(newBombImg)
         arrImg.push(document.querySelector('img'))
-        bomb.y = -300//to remove the bomb outside canvas
+        bomb.x = -300//to remove the bomb outside canvas
         pickupBombAudio.play()
-    }else console.log('didnt work')
-    // } else  display.innerText = 'Bomb Holder is full'
+    }
 }
 
 function charMeetsGoal(bomber,ziggy){
@@ -158,7 +143,9 @@ function charMeetsGoal(bomber,ziggy){
         display.innerText = 'Ziggy is saved!'
         winAudio.play()
         // clearInterval(gameLoopInterval)
-        startEndGame()
+        clearInterval(gameLoopInterval)
+        gameLoopInterval = null
+        bgAudio.pause()
        }
 }
 
@@ -168,11 +155,9 @@ function bombMeetsEnemy(bomb,enemy){
         enemy.y + (enemy.height -5)>= bomb.y &&
         bomb.y + (bomb.height -5)>= enemy.y )
         {
-        // enemyDeadAudio.play()
         bomb.y = -300
-        enemy.y = -300 
+        enemy.x = -300
         enemyDeadAudio.play()
-        setTimeout(function() {enemyDeadAudio.pause()}, 2500)
      }
 }
 
@@ -184,7 +169,9 @@ function charMeetsEnemy(bomber,underMiner){
        {
         display.innerText = 'Underminers just killed you :('
         charDeadAudio.play()
-        startEndGame()      
+        clearInterval(gameLoopInterval)
+        gameLoopInterval = null
+        bgAudio.pause()    
        }
 }
 
@@ -273,17 +260,22 @@ function gameLoop() {
 
     }
 
+    crate.render()
+
     underMiner1.render() //renders the enemy
     underMiner2.render() 
     underMiner3.render() 
     underMiner4.render() 
     underMiner5.render() 
+
     moveEnemy1(underMiner1,20)//enemy moves
     moveEnemy2(underMiner2,15)
     moveEnemy3(underMiner3,10)
     moveEnemy4(underMiner4,15)
     moveEnemy5(underMiner5,20)
+
     charMeetsGoal(bomber,ziggy) //main char -> goal collision detection
+
     charMeetsEnemy(bomber,underMiner1)//main char -> enemy collision detection
     charMeetsEnemy(bomber,underMiner2)
     charMeetsEnemy(bomber,underMiner3)

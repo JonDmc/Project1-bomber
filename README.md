@@ -24,11 +24,10 @@ Don't fret, ziggy had unfortunately dropped some of her bombs along the corridor
 
 # Stretch Goals
 * Be able to move underminers.
-* Be able to destroy underminers with the bomb by using Collision Detection.
+* Be able to destroy underminers with the bomb.
 * Be able to render the walls and destroy it.
-* Be able to use sprites/images for the characters
+* Be able to use images for the characters.
 * Be able to stop the game if the underminers reached Bomber.
-* Be able to change the level (i.e. the position of the walls, underminers,bombs; the pacing of the underminers,etc..)
 
 # Potential Roadblocks
 * Rendering images/sprites
