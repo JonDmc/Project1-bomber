@@ -9,9 +9,11 @@ canvas.setAttribute("width", getComputedStyle(canvas)["width"])
 const display = document.querySelector('#message')
 const restartBtn = document.querySelector('#restart')
 const startBtn = document.querySelector('#start')
+const audioBtn = document.querySelector('#audio')
 
 restartBtn.addEventListener('click', restartGame)
-startBtn.addEventListener('click', startEndGame)
+startBtn.addEventListener('click', startGame)
+audioBtn.addEventListener('click', toggleAudio)
 
 const pressedKeys = {}
 document.addEventListener('keydown', e => pressedKeys[e.key] = true)
@@ -47,6 +49,7 @@ const enemyDeadAudio = new Audio('audio/enemy-dead-sfx.wav')
 const charDeadAudio = new Audio('audio/char-dead-sfx.wav')
 const pickupBombAudio = new Audio('audio/pickup-sfx.wav')
 
+let gameIsOn = false
 //global switcher for each of the enemy
 let collision1 = false
 let collision2 = false
@@ -76,20 +79,42 @@ const ziggy = new Pixel(ziggyImg,Math.floor(canvas.width-(canvas.width*.1)),Math
 const underMiner1 = new Pixel(umImg,(canvas.width*.1)*2,500,60,60)
 const underMiner2 = new Pixel(umImg,(canvas.width*.2)*1.5,600,60,60)
 const underMiner3 = new Pixel(umImg,(canvas.width*.3)*1.5,700,60,60)
-const underMiner4 = new Pixel(umImg,(canvas.width*.4)*1.5,200,60,60)
-const underMiner5 = new Pixel(umImg,(canvas.width*.5)*1.5,100,60,60)
+const underMiner4 = new Pixel(umImg,(canvas.width*.4)*1.5,100,60,60)
+const underMiner5 = new Pixel(umImg,(canvas.width*.5)*1.5,-100,60,60)
+
+// const crate = new Pixel(crateImg,Math.floor(Math.random()*(canvas.width)),Math.floor(Math.random()*(canvas.height)),40,40)
 
 // DECLARATION OF OBJECTS end---------------------------------
 
-function startEndGame(){
-
-    if(!gameLoopInterval){
-    gameLoopInterval = setInterval(gameLoop,60)
+function startGame(){
+    if(gameIsOn === false)
+    {
+        gameIsOn = true
+        bgAudio.play()
+        if(!gameLoopInterval){
+        gameLoopInterval = setInterval(gameLoop,60)
+        }
     }
+    document.getElementById('start').style.display = 'none'
+    document.getElementById('restart').style.display = 'flex'
+
 }
 
 function restartGame(){
-    location.reload()  
+        location.reload()
+}
+
+function toggleAudio(){
+    if(gameIsOn === true){
+        if(bgAudio.paused === true){
+            bgAudio.play()
+            document.getElementById('audioIcon').src = 'img/audio-on.png'
+            
+        }else if(bgAudio.paused === false){
+            bgAudio.pause()
+            document.getElementById('audioIcon').src = 'img/audio-off.png'  
+        }
+    }
 }
 
 function controls() {
@@ -144,6 +169,7 @@ function charMeetsGoal(bomber,ziggy){
         // clearInterval(gameLoopInterval)
         clearInterval(gameLoopInterval)
         gameLoopInterval = null
+        gameIsOn = false
         bgAudio.pause()
        }
 }
@@ -170,6 +196,7 @@ function charMeetsEnemy(bomber,underMiner){
         charDeadAudio.play()
         clearInterval(gameLoopInterval)
         gameLoopInterval = null
+        gameIsOn = false
         bgAudio.pause()    
        }
 }
@@ -247,16 +274,21 @@ function moveEnemy5(enemy,speed){
 }
 
 function gameLoop() {
-    bgAudio.play()
+    
     ctx.clearRect(0,0,canvas.width,canvas.height)
     bomber.render() //renders the main char
     ziggy.render()  //renders the goal
     controls()
+
+    // crate.render()
+
     //renders the bomb image stored in the array of images
     for(let i = 0; i < arrBomb.length;i++){
         arrBomb[i].render()
 
     }
+
+    
 
     underMiner1.render() //renders the enemy
     underMiner2.render() 
@@ -264,9 +296,9 @@ function gameLoop() {
     underMiner4.render() 
     underMiner5.render() 
 
-    moveEnemy1(underMiner1,20)//enemy moves
+    moveEnemy1(underMiner1,20)//enemy moves with speed
     moveEnemy2(underMiner2,15)
-    moveEnemy3(underMiner3,10)
+    moveEnemy3(underMiner3,25)
     moveEnemy4(underMiner4,15)
     moveEnemy5(underMiner5,20)
 
