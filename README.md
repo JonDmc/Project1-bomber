@@ -66,3 +66,6 @@ function plantBomb(e){
 * Credits to google images, Imgbin [ImgBin](imgbin.com) , Favpng [Favpng](favpng.com) 
 * Credits to Sounds-Resource [Sounds-resource](www.sounds-resource.com)
 * Credits to youtube for the music
+
+### Try it out
+[Project-Bomber](https://jondmc.github.io/Project1-bomber/)
