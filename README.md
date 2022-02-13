@@ -18,6 +18,9 @@ Don't fret, ziggy had unfortunately dropped some of her bombs along the corridor
 ### Final product
 ![Final-wireframe](wireframe-update.JPG)
 
+# Try it out
+[Project-Bomber](https://jondmc.github.io/Project1-bomber/)
+
 # MVP Goals
 * Be able to render bomber and ziggy.
 * Be able to render 5 underminers with different x-y positions.
@@ -55,7 +58,7 @@ function plantBomb(e){
 ```
 
 # Future Stretch Goals && Refactorings
-* Rendering random bombs along the map and be able to pick it up (On-going bug)
+* Rendering random bombs along the map and be able to pick it up
 * Rendering random enemies with random x-y positions within the space between bomber and ziggy
 * Rendering walls with random x-y positions
 * Animations for the character elements when they move
@@ -63,9 +66,6 @@ function plantBomb(e){
 * Refactoring collision detection for the character elements
 
 # Credits
-* Credits to google images, Imgbin [ImgBin](imgbin.com) , Favpng [Favpng](favpng.com) 
+* Credits to google images, Imgbin , Favpng
 * Credits to Sounds-Resource [Sounds-resource](www.sounds-resource.com)
 * Credits to youtube for the music
-
-### Try it out
-[Project-Bomber](https://jondmc.github.io/Project1-bomber/)
