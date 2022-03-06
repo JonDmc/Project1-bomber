@@ -101,8 +101,6 @@ function startGame(){
 }
 
 function restartGame(){
-        // location.reload()
-        
         bomber.x = Math.floor(canvas.width*.1)
         bomber.y = Math.floor(canvas.height*.4)
         underMiner1.x = (canvas.width*.1)*2
